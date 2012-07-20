@@ -1,0 +1,7 @@
+Django==1.4
+South==0.7.5
+lxml==2.3.4
+requests==0.13.3
+celery==2.5.5
+django-kombu==0.9.4
+django-celery==2.5.5

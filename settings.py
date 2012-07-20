@@ -2,11 +2,8 @@
 
 from config_settings import *
 
-DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (('b3ni', 'brarcos@gmail.com'),)
-
 MANAGERS = ADMINS
 
 # Local time zone for this installation. Choices can be found here:
@@ -32,32 +29,30 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+# If you set this to False, Django will not use timezone-aware datetimes.
+USE_TZ = True
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = DIR_BASE + 'media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-#STATIC_ROOT = ''
+STATIC_ROOT = 'static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = URL_BASE + '/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
 # Additional locations of static files
-STATICFILES_DIRS = (DIR_BASE + "/static",)
+STATICFILES_DIRS = (DIR_BASE + "_static_global",)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -83,11 +78,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    # Uncomment the next line for simple clickjacking protection:
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'linuxmagazineviewer.urls'
+ROOT_URLCONF = 'urls'
 
-TEMPLATE_DIRS = (DIR_BASE + r"templates/",)
+# Python dotted path to the WSGI application used by Django's runserver.
+WSGI_APPLICATION = 'wsgi.application'
+
+# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+# Always use forward slashes, even on Windows.
+# Don't forget to use absolute paths, not relative paths.
+TEMPLATE_DIRS = (DIR_BASE + "templates",)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -96,12 +99,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+
+    'south',
+    'kombu.transport.django',
+    'djcelery',
+
+    'apps.issues',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -126,3 +130,7 @@ LOGGING = {
         },
     }
 }
+
+# LOGIN_REDIRECT_URL = reverse_lazy('home')
+# LOGIN_URL = reverse_lazy('login')
+# LOGOUT_URL = reverse_lazy('logout')

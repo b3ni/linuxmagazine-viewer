@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from apps.issues.models import Issue
-from misc.factories import xmlDoc_from_html
-from misc.tasks import BasePeriodicTask
+from lxml import etree
+from misc.tasks import TaskLockedMixin
+from celery.task.base import PeriodicTask
 import requests
 import config_lmv
 
 
-class ReadIssuesPeriodicTask(BasePeriodicTask):
+class ReadIssuesPeriodicTask(PeriodicTask, TaskLockedMixin):
     """
     Comprueba si hay ediciones nuevas de la revista para ser descargadas
     """
@@ -21,7 +22,7 @@ class ReadIssuesPeriodicTask(BasePeriodicTask):
         i = Issue()
         print i
 
-        dom = xmlDoc_from_html(r.text)
+        dom = etree.parse(r.text)
         for link in enumerate(dom.xpath('//a[contains(@href, "/issue/")]')):
             print link
 

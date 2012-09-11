@@ -102,10 +102,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'south',
-    'kombu.transport.django',
-    'djcelery',
+    #'djcelery',
 
     'apps.issues',
+    'apps.crawler',
 )
 
 # A sample logging configuration. The only tangible logging

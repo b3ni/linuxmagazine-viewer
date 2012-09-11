@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 DEBUG = True
-DIR_BASE = '/home/brodriguez/workspace/lmv/linuxmagazine-viewer/'
+DIR_BASE = '/home/brodriguez/workspace/lvm/linuxmagazine-viewer/'
 URL_BASE = ''
 
 DATABASES = {

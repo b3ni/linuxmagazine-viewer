@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from config_celery import acquire_lock, release_lock
-from celery.task.base import PeriodicTask
 
 
-class BasePeriodicTask(PeriodicTask):
+class TaskLockedMixin(object):
     """ Base para tareas periodicas """
     logger = None
 
